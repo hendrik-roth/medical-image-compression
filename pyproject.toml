@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "medical_image_compression"
+version = "0.0.1"
+authors = [
+  { name="Hendrik Roth"},
+]
+description = "Package for the seminar paper"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "scikit-image>=0.19.3",
+    "pydicom>=2.3.1",
+    "matplotlib>=3.6.2"
+]
