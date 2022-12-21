@@ -20,5 +20,7 @@ classifiers = [
 dependencies = [
     "scikit-image>=0.19.3",
     "pydicom>=2.3.1",
-    "matplotlib>=3.6.2"
+    "matplotlib>=3.6.2",
+    "pandas",
+    "image-similarity-measures"
 ]
