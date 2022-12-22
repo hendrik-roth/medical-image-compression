@@ -15,9 +15,9 @@ class Miqa:
         Returns:
             tuple: (ssim, fsim)
         """
-        dtype_ranges = {np.uint8: 255, np.uint16: 65535,
-                        np.uint32: (2 ** 32) - 1, float: 1, np.int8: 128,
-                        np.int16: -32768, np.int32: 2 ** 31}
+        dtype_ranges = {np.dtype('uint8'): 255, np.dtype("uint16"): 65535,
+                        np.dtype("uint32"): (2 ** 32) - 1, float: 1, np.dtype('int8'): 128,
+                        np.dtype('int16'): -32768, np.dtype('int32'): 2 ** 31}
         data_range = dtype_ranges[self.reference_image.pixel_array.dtype]
         _ssim = structural_similarity(self.reference_image.pixel_array,
                                       self.compressed_image.pixel_array,
@@ -26,7 +26,7 @@ class Miqa:
                                       use_sample_covariance=False,
                                       data_range=data_range)
 
-        _fsim = fsim(self.reference_image.pixel_array,
-                     self.compressed_image.pixel_array)
+        # _fsim = fsim(self.reference_image.pixel_array,
+        #             self.compressed_image.pixel_array)
 
-        return _ssim, _fsim
+        return _ssim, 1

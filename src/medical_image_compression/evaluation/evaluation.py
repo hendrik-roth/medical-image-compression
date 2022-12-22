@@ -1,3 +1,6 @@
+import datetime
+import os
+
 import pandas as pd
 
 from pathlib import Path
@@ -23,6 +26,7 @@ class Evaluator:
         self.images = images
         self.compression_method = compression_method
         self.out_path = out_path
+        self.create_dir_safely(self.out_path)
 
     def evaluate(self):
         """main function to perform complete evaluation
@@ -52,9 +56,9 @@ class Evaluator:
                 self.compression_method(image)
                 t1 = time()
                 compression_time = t1 - t0
-
                 # save compressed file
-                compressed_path = f"{self.out_path}/{idx}/{filename}-compressed.dcm"
+                compressed_path = f"{self.out_path}/{idx}/compressed-{datetime.datetime.now():%Y-%m-%d-%H-%M-%S-%f}.dcm"
+                self.create_dir_safely(f"{self.out_path}/{idx}/")
                 image.save_as(compressed_path)
 
                 # Medical Image Quality Assessment (MIQA)
@@ -62,7 +66,7 @@ class Evaluator:
                 ssim, fsim = miqa.get_miqa_metrics()
 
                 # Compression Assessment
-                cr = Path(f"{path}/{filename}").stat().st_size / Path(
+                cr = Path(f"{filename}").stat().st_size / Path(
                     compressed_path).stat().st_size
 
                 # add to lists
@@ -86,3 +90,8 @@ class Evaluator:
         """
         metric_df = pd.DataFrame.from_dict(metrics)
         return metric_df.describe()
+
+    @staticmethod
+    def create_dir_safely(path):
+        if not os.path.exists(path):
+            os.makedirs(path)
