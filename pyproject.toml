@@ -22,5 +22,6 @@ dependencies = [
     "pydicom>=2.3.1",
     "matplotlib>=3.6.2",
     "pandas",
-    "image-similarity-measures"
+    "opencv-contrib-python",
+    "piq"
 ]
