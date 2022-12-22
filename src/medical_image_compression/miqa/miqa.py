@@ -39,6 +39,17 @@ class Miqa:
 
     @torch.no_grad()
     def calc_fsim(self):
+        """calculate fsim metric
+
+        based on Kastryulin et al. [1] GitHub implementation 
+        https://github.com/photosynthesis-team/piq
+
+        [1] S. Kastryulin, J. Zakirov, D. Prokopenko, and D. V. Dylov, 
+        PyTorch Image Quality: Metrics for Image Quality Assessment: arXiv. [Online].
+        Available: https://doi.org/10.48550/arxiv.2208.14818
+
+
+        """
         # transform greyscale into rgb channels
         reference = imread(self.path_reference)
         reference_8bit = img_as_ubyte(exposure.rescale_intensity(reference))
